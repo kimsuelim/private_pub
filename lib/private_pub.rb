@@ -44,7 +44,8 @@ module PrivatePub
 
     # Returns a message hash for sending to Faye
     def message(channel, data)
-      message = {:channel => channel, :data => {:channel => channel}, :ext => {:private_pub_token => config[:secret_token]}}
+      message = {:channel => channel, :data => {:channel => channel},
+                 :ext => {:private_pub_token => config[:secret_token], :private_pub_user_id => current_user.id}}
       if data.kind_of? String
         message[:data][:eval] = data
       else
